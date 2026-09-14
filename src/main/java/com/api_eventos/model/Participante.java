@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,6 +25,6 @@ public class Participante {
     private String email;
 
     @OneToMany(mappedBy = "participante")
-    private List<Inscricao> inscricoes = new ArrayList<>();
+    private List<Inscricao> inscricao;
 }
 
