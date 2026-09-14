@@ -5,6 +5,7 @@ import lombok.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -33,5 +34,5 @@ public class Evento {
     private Integer capacidadeMaxima;
 
     @OneToMany(mappedBy = "evento")
-    private List<Inscricao> inscricao;
+    private List<Inscricao> inscricoes = new ArrayList<>();
 }
