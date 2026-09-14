@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -23,7 +24,7 @@ public class Participante {
     @Column(nullable = false)
     private String email;
 
-    @OneToMany(mappedBy = "inscricao")
-    private Inscricao inscricao;
+    @OneToMany(mappedBy = "participante")
+    private List<Inscricao> inscricao;
 }
 

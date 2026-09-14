@@ -26,7 +26,7 @@ public class Inscricao {
     @JoinColumn()
     private Evento evento;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private List<Participante> participante;
+    @ManyToOne
+    private Participante participante;
 }
 

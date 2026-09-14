@@ -7,7 +7,6 @@ import com.api_eventos.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class EventoService {
@@ -35,7 +34,7 @@ public class EventoService {
         return toResponseDTO(salvo);
     }
 
-    public List<EventoResponseDTO> listar (EventoResponseDTO dto){
+    public List<EventoResponseDTO> listar (){
         return eventoRepository.findAll().stream().map(this::toResponseDTO).toList();
     }
 
