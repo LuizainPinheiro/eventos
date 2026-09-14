@@ -1,10 +1,13 @@
 package com.api_eventos.service;
 
+import com.api_eventos.dto.EventoResponseDTO;
 import com.api_eventos.dto.ParticipanteRequestDTO;
 import com.api_eventos.dto.ParticipanteResponseDTO;
 import com.api_eventos.model.Participante;
 import com.api_eventos.repository.ParticipanteRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class ParticipanteService {
@@ -26,6 +29,19 @@ public class ParticipanteService {
         participante.setEmail(dto.email());
         Participante salvo = participanteRepository.save(participante);
         return toDTO(salvo);
+    }
+
+    public List<ParticipanteResponseDTO> listar (){
+        return participanteRepository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .toList();
+    }
+
+    public ParticipanteResponseDTO buscarPorId(Long id){
+        Participante participante = participanteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Participante não encontrado com o id: " + id));
+       return toDTO(participante);
     }
 
     private ParticipanteResponseDTO toDTO(Participante participante) {
