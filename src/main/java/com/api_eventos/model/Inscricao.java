@@ -22,10 +22,11 @@ public class Inscricao {
     @Column(nullable = false)
     private LocalDate dataInscricao;
 
-    @ManyToOne(cascade = CascadeType.ALL)
-    private List<Evento> evento = new ArrayList<>();
+    @ManyToOne
+    @JoinColumn()
+    private Evento evento;
 
     @ManyToOne(cascade = CascadeType.ALL)
-    private List<Participante> participante = new ArrayList<>();
+    private List<Participante> participante;
 }
 

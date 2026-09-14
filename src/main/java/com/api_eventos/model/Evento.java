@@ -5,11 +5,13 @@ import lombok.*;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Evento {
 
     @Id
@@ -30,6 +32,6 @@ public class Evento {
     @Column(nullable = false)
     private Integer capacidadeMaxima;
 
-    @OneToMany(mappedBy = "inscricao")
-    private Inscricao inscricao;
+    @OneToMany(mappedBy = "evento")
+    private List<Inscricao> inscricao;
 }
