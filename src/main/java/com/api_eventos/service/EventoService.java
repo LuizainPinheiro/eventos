@@ -6,6 +6,9 @@ import com.api_eventos.model.Evento;
 import com.api_eventos.repository.EventoRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Optional;
+
 @Service
 public class EventoService {
 
@@ -32,7 +35,12 @@ public class EventoService {
         return toResponseDTO(salvo);
     }
 
+    public List<EventoResponseDTO> listar (EventoResponseDTO dto){
+        return eventoRepository.findAll().stream().map(this::toResponseDTO).toList();
+    }
 
-
+    public EventoResponseDTO buscarPorId(Long id){
+        return toResponseDTO(eventoRepository.findById(id).orElseThrow(() -> new RuntimeException("Evento nao encontrado.")));
+    }
 
 }
