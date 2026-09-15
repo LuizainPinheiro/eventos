@@ -26,6 +26,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT).body(corpo);
     }
 
+    @ExceptionHandler(EventoLotadoException.class)
+    public ResponseEntity<ErroResponseDTO> handleLotado(EventoLotadoException ex) {
+        ErroResponseDTO corpo = new ErroResponseDTO(HttpStatus.CONFLICT.value(), ex.getMessage());
+        return ResponseEntity.status(HttpStatus.CONFLICT).body(corpo);
+    }
+
     @ExceptionHandler(RecursoNaoEncontradoException.class)
     public ResponseEntity<ErroResponseDTO> handleNotFound(RecursoNaoEncontradoException ex) {
         ErroResponseDTO corpo = new ErroResponseDTO(HttpStatus.NOT_FOUND.value(), ex.getMessage());

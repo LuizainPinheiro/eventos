@@ -17,4 +17,6 @@ public interface InscricaoRepository extends JpaRepository<Inscricao, Long> {
             Long participanteId,
             Long eventoId
     );
+
+    long countByEventoId(Long eventoId);
 }
