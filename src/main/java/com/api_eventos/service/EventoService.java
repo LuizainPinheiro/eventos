@@ -2,6 +2,7 @@ package com.api_eventos.service;
 
 import com.api_eventos.dto.EventoRequestDTO;
 import com.api_eventos.dto.EventoResponseDTO;
+import com.api_eventos.exception.RecursoNaoEncontradoException;
 import com.api_eventos.model.Evento;
 import com.api_eventos.repository.EventoRepository;
 import org.springframework.stereotype.Service;
@@ -39,7 +40,7 @@ public class EventoService {
     }
 
     public EventoResponseDTO buscarPorId(Long id){
-        return toResponseDTO(eventoRepository.findById(id).orElseThrow(() -> new RuntimeException("Evento nao encontrado.")));
+        return toResponseDTO(eventoRepository.findById(id).orElseThrow(() -> new RecursoNaoEncontradoException("Evento nao encontrado.")));
     }
 
 }
