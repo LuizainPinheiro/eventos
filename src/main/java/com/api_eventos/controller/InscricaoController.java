@@ -4,6 +4,7 @@ import com.api_eventos.dto.InscricaoRequestDTO;
 import com.api_eventos.dto.InscricaoResponseDTO;
 import com.api_eventos.model.Inscricao;
 import com.api_eventos.service.InscricaoService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,18 +20,26 @@ public class InscricaoController {
     }
 
     @PostMapping
-    public InscricaoResponseDTO inscrever(@RequestBody InscricaoRequestDTO dto){
+    public InscricaoResponseDTO inscrever(@RequestBody InscricaoRequestDTO dto) {
         return inscricaoService.inscrever(dto.dataInscricao(), dto.participanteId(), dto.eventoId());
     }
 
     @GetMapping
-    public List<InscricaoResponseDTO>listar(){
+    public List<InscricaoResponseDTO> listar() {
         return inscricaoService.listar();
     }
 
     @GetMapping("/{id}")
-    public InscricaoResponseDTO buscarPorId(@PathVariable Long id){
+    public InscricaoResponseDTO buscarPorId(@PathVariable Long id) {
 
         return inscricaoService.buscarPorId(id);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> cancelar(@PathVariable Long id) {
+        inscricaoService.cancelar(id);
+        return ResponseEntity.noContent().build();
+    }
+
 }
+

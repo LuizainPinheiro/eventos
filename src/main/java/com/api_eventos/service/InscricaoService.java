@@ -62,6 +62,13 @@ public class InscricaoService {
         return toDTO(salva);
     }
 
+    public void cancelar(Long id) {
+        if (!inscricaoRepository.existsById(id)){
+            throw new RuntimeException("Inscrição não encontrada com o id: " + id);
+        }
+        inscricaoRepository.deleteById(id);
+    }
+
     private InscricaoResponseDTO toDTO(Inscricao inscricao) {
         return new InscricaoResponseDTO(
                 inscricao.getId(),
@@ -70,4 +77,6 @@ public class InscricaoService {
                 inscricao.getEvento().getId()
         );
     }
+
+
 }
