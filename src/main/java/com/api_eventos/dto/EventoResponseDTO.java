@@ -9,7 +9,8 @@ public record EventoResponseDTO(
         String descricao,
         LocalDate data,
         String local,
-        Integer capacidadeMaxima
+        Integer capacidadeMaxima,
+        Integer vagasDisponiveis
 
 ) {
 }

@@ -25,7 +25,8 @@ public class EventoService {
                 evento.getDescricao(),
                 evento.getData(),
                 evento.getLocal(),
-                evento.getCapacidadeMaxima()
+                evento.getCapacidadeMaxima(),
+                evento.getCapacidadeMaxima()-evento.getInscricao().size()
         );
     }
 
