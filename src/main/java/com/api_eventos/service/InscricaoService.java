@@ -16,15 +16,17 @@ public class InscricaoService {
     private final InscricaoRepository inscricaoRepository;
     private final EventoRepository eventoRepository;
 
-    public InscricaoService(ParticipanteService participanteService, EventoService eventoService, InscricaoRepository inscricaoRepository) {
+    public InscricaoService(ParticipanteService participanteService, EventoService eventoService, InscricaoRepository inscricaoRepository, EventoRepository eventoRepository) {
         this.participanteService = participanteService;
         this.eventoService = eventoService;
         this.inscricaoRepository = inscricaoRepository;
+        this.eventoRepository = eventoRepository;
     }
 
-    public Inscricao inscrever (Long participanteId, Long eventoId{
+    public Inscricao inscrever (Long participanteId, Long eventoId {
         var participanteQueVeioDoBanco = participanteService.buscarPorId(participanteId);
         var eventoQueVeioDoBanco = eventoService.buscarPorId(eventoId);
-        List<Evento> inscritos = eventoRepository.findById()
+        Inscricao inscricao = Inscricao.builder().;
+
     }
 }
