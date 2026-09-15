@@ -1,9 +1,11 @@
 package com.api_eventos.service;
 
 import com.api_eventos.dto.InscricaoResponseDTO;
+import com.api_eventos.dto.ParticipanteResponseDTO;
 import com.api_eventos.exception.InscricaoNaoDisponivelException;
 import com.api_eventos.exception.RecursoNaoEncontradoException;
 import com.api_eventos.model.Inscricao;
+import com.api_eventos.model.Participante;
 import com.api_eventos.repository.EventoRepository;
 import com.api_eventos.repository.InscricaoRepository;
 import com.api_eventos.repository.ParticipanteRepository;
@@ -67,6 +69,25 @@ public class InscricaoService {
             throw new RuntimeException("Inscrição não encontrada com o id: " + id);
         }
         inscricaoRepository.deleteById(id);
+    }
+
+    public List<ParticipanteResponseDTO> listarParticipantesPorEvento(Long eventoId) {
+        if (!eventoRepository.existsById(eventoId)) {
+            throw new RuntimeException("Evento não encontrado com o id: " + eventoId);
+        }
+
+        return inscricaoRepository.findByEventoId(eventoId)
+                .stream()
+                .map(inscricao -> toParticipanteDTO(inscricao.getParticipante()))
+                .toList();
+    }
+
+    private ParticipanteResponseDTO toParticipanteDTO(Participante participante) {
+        return new ParticipanteResponseDTO(
+                participante.getId(),
+                participante.getNome(),
+                participante.getEmail()
+        );
     }
 
     private InscricaoResponseDTO toDTO(Inscricao inscricao) {

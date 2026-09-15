@@ -2,6 +2,7 @@ package com.api_eventos.controller;
 
 import com.api_eventos.dto.InscricaoRequestDTO;
 import com.api_eventos.dto.InscricaoResponseDTO;
+import com.api_eventos.dto.ParticipanteResponseDTO;
 import com.api_eventos.model.Inscricao;
 import com.api_eventos.service.InscricaoService;
 import org.springframework.http.ResponseEntity;
@@ -39,6 +40,12 @@ public class InscricaoController {
     public ResponseEntity<Void> cancelar(@PathVariable Long id) {
         inscricaoService.cancelar(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/evento/{eventoId}")
+    public ResponseEntity<List<ParticipanteResponseDTO>> listarParticipantesPorEvento(@PathVariable Long eventoId) {
+        List<ParticipanteResponseDTO> participantes = inscricaoService.listarParticipantesPorEvento(eventoId);
+        return ResponseEntity.ok(participantes);
     }
 
 }
