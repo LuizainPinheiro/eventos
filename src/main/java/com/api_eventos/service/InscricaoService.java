@@ -2,6 +2,7 @@ package com.api_eventos.service;
 
 import com.api_eventos.dto.InscricaoResponseDTO;
 import com.api_eventos.dto.ParticipanteResponseDTO;
+import com.api_eventos.exception.EventoLotadoException;
 import com.api_eventos.exception.InscricaoNaoDisponivelException;
 import com.api_eventos.exception.RecursoNaoEncontradoException;
 import com.api_eventos.model.Inscricao;
@@ -50,6 +51,12 @@ public class InscricaoService {
         boolean existeConflito = inscricaoRepository.existsByDataInscricaoAndParticipanteIdAndEventoId(
                 dataInscricao, participanteId, eventoId
         );
+
+        long inscricoesAtuais = inscricaoRepository.countByEventoId(eventoId);
+
+        if (inscricoesAtuais >= eventoCadastrado.getCapacidadeMaxima()) {
+            throw new EventoLotadoException("Evento está lotado.");
+        }
 
         if (existeConflito) {
             throw new InscricaoNaoDisponivelException("Você já está cadastrado nesse evento.");
